@@ -41,21 +41,17 @@ public class ExampleRestController extends BaseController {
             someService.setRandomUser(MapperUtil.convertRandomUserDtoToModel(randomUserDto));
         } catch (InnerValidationException e) {
             return ResponseEntity.badRequest().body(
-                    objectMapper.writeValueAsString(
-                            ExceptionDto.builder()
-                                    .code(1234)
-                                    .message(e.getMessage())
-                                    .build()
-                    )
+                    ExceptionDto.builder()
+                            .code(1234)
+                            .message(e.getMessage())
+                            .build()
             );
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(
-                    objectMapper.writeValueAsString(
-                            ExceptionDto.builder()
-                                    .code(-1)
-                                    .message("Unknown Error")
-                                    .build()
-                    )
+                    ExceptionDto.builder()
+                            .code(-1)
+                            .message("Unknown Error")
+                            .build()
             );
         }
         return ResponseEntity.ok().build();
